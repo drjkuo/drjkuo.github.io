@@ -18,12 +18,59 @@ var accidents = [{"_id":"1","YLR_CORD":"2770452.937","MREASON":"車與車","OccT
 proj4.defs('TWD97', '+proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +units=m +no_defs')
 var coord = proj4('TWD97').inverse([305155.8065, 2774780.945])
 var map;
+var MY_MAPTYPE_ID = 'custom_style';
 function initialize() {
+    var featureOpts = [
+    {
+      stylers: [
+        { hue: '#890000' },
+        { visibility: 'simplified' },
+        { gamma: 0.5 },
+        { weight: 0.5 }
+      ]
+    },
+    {
+      elementType: 'labels',
+      stylers: [
+        { visibility: 'off' }
+      ]
+    },
+    {
+      featureType: 'water',
+      stylers: [
+        { color: '#890000' }
+      ]
+    }
+  ];
+
+/*
   var mapOptions = {
-    zoom: 8,
+    zoom: 14,
     center: new google.maps.LatLng(coord[1], coord[0])
   };
+*/
+
+  var mapOptions = {
+    zoom: 12,
+    center: new google.maps.LatLng(coord[1], coord[0]),
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+    },
+    mapTypeId: MY_MAPTYPE_ID
+  };
+
   map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+
+  var styledMapOptions = {
+    name: 'Custom Style'
+  };
+
+  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+
+
 
   accidents.map(function(a){
       var coord = proj4('TWD97').inverse([a['XUL_CORD'], a['YUL_CORD']])
