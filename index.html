@@ -18,7 +18,9 @@
   <script>
 
   proj4.defs('TWD97', '+proj=tmerc +lat_0=0 +lon_0=121 +k=0.9999 +x_0=250000 +y_0=0 +ellps=GRS80 +units=m +no_defs')
-  var coord = proj4('TWD97').inverse([305155.8065, 2774780.945])
+  // var coord = proj4('TWD97').inverse([305155.8065, 2774780.945])
+
+  var coord = proj4('TWD97').inverse([304818.816, 2770545.923]) // 忠孝復興站
   var map;
   var MY_MAPTYPE_ID = 'custom_style';
   function initMap() {
@@ -56,7 +58,7 @@
 
 
   var mapOptions = {
-    zoom: 12,
+    zoom: 14,
     center: new google.maps.LatLng(coord[1], coord[0]),
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
@@ -76,7 +78,7 @@
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 
   // var _accidents = accidents;
-  console.log(accidents);
+  // console.log(accidents);
   // var noaccidents = accidents;
 
   accidents.map(function(a){
