@@ -23,26 +23,26 @@
   var MY_MAPTYPE_ID = 'custom_style';
   function initMap() {
     var featureOpts = [
-      {
-        stylers: [
-          { hue: '#890000' },
-          { visibility: 'simplified' },
-          { gamma: 0.5 },
-          { weight: 0.5 }
-        ]
-      },
-      {
-        elementType: 'labels',
-        stylers: [
-          { visibility: 'off' }
-        ]
-      },
-      {
-        featureType: 'water',
-        stylers: [
-          { color: '#890000' }
-        ]
-      }
+      // {
+      //   stylers: [
+      //     { hue: '#890000' },
+      //     { visibility: 'simplified' },
+      //     { gamma: 0.5 },
+      //     { weight: 0.5 }
+      //   ]
+      // },
+      // {
+      //   elementType: 'labels',
+      //   stylers: [
+      //     { visibility: 'off' }
+      //   ]
+      // },
+      // {
+      //   featureType: 'water',
+      //   stylers: [
+      //     { color: '#890000' }
+      //   ]
+      // }
     ];
 
     /*
@@ -51,6 +51,9 @@
     center: new google.maps.LatLng(coord[1], coord[0])
   };
   */
+
+
+
 
   var mapOptions = {
     zoom: 12,
@@ -78,11 +81,23 @@
 
   accidents.map(function(a){
     var coord = proj4('TWD97').inverse([a['XUL_CORD'], a['YUL_CORD']])
-    new google.maps.Marker({
-      position: new google.maps.LatLng(coord[1], coord[0]),
+    // new google.maps.Marker({
+    //   position: new google.maps.LatLng(coord[1], coord[0]),
+    //   map: map,
+    //   title: a['_id']
+    // });
+
+    new google.maps.Circle({
+      strokeColor: '#FF0000',
+      strokeOpacity: 0.8,
+      strokeWeight: 2,
+      fillColor: '#FF0000',
+      fillOpacity: 0.35,
       map: map,
-      title: a['_id']
+      center: new google.maps.LatLng(coord[1], coord[0]),//citymap[city].center,
+      radius: (a['A1A2']) * 50 // Math.sqrt
     });
+
   })
 }
 
