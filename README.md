@@ -2,13 +2,9 @@ DEMO: https://drjkuo.github.io/
 
 To do list:
 
-(1) ? -- add text inside markers; 
+(1) Add street view button
 
-(2) DONE -- turn markers into circles and note the number of accidents; 
-
-(3) Add street view button
-
-(4) Add more yearly traffic data
+(2) Add more yearly traffic data
 
 
 Reference:
